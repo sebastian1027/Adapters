@@ -1,6 +1,7 @@
 package movil.unicauca.adapter.Adapters;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,6 +11,8 @@ import java.util.List;
 
 import movil.unicauca.adapter.Models.Planeta;
 import movil.unicauca.adapter.R;
+import movil.unicauca.adapter.databinding.TemplatePlanetaBinding;
+import movil.unicauca.adapter.util.Data;
 
 /**
  * Created by Sebastianl on 05/04/2017.
@@ -51,11 +54,10 @@ public class PlanetaAdapter extends BaseAdapter{
         }
 
         Planeta p = data.get(position);
-        TextView nombre = (TextView) v.findViewById(R.id.nombre);
-        TextView gravedad = (TextView) v.findViewById(R.id.gravedad);
 
-        nombre.setText(p.getNombre());
-        gravedad.setText(""+p.getGravedad());
+        TemplatePlanetaBinding binding = DataBindingUtil.bind(convertView);
+        binding.setPlaneta(p);
+
         return v;
     }
 }

@@ -1,5 +1,6 @@
 package movil.unicauca.adapter;
 
+import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -8,25 +9,21 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import movil.unicauca.adapter.Models.Planeta;
+import movil.unicauca.adapter.databinding.ActivityAddBinding;
 import movil.unicauca.adapter.util.Data;
 
-public class AddActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddActivity extends AppCompatActivity {
 
-    EditText nombre, gravedad;
-    Button guardar;
+    ActivityAddBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
-
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_add);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        nombre = (EditText) findViewById(R.id.nombre);
-        gravedad = (EditText) findViewById(R.id.gravedad);
-        guardar = (Button) findViewById(R.id.guardar);
 
-        guardar.setOnClickListener(this);
     }
 
     @Override
@@ -36,11 +33,10 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View v) {
+    public void guardar(){
 
-        String n = nombre.getText().toString();
-        String g = gravedad.getText().toString();
+        String n = binding.nombre.getText().toString();
+        String g = binding.gravedad.getText().toString();
         Planeta p = new Planeta(n, Float.parseFloat(g));
         Data.planetas.add(p);
         finish();
